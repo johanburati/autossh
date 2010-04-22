@@ -57,6 +57,6 @@ install:	$(TARGET)
 		chmod 755 $(bindir)/$(TARGET)
 		chmod 644 $(datadir)/doc/autossh/CHANGES
 		chmod 644 $(datadir)/doc/autossh/README
-		chmod 644 $(datadir)/examples/autossh/autossh.host 
+		chmod 644 $(datadir)/examples/autossh/autossh.host
 		chmod 644 $(datadir)/examples/autossh/rscreen
-		chmod 644 $(mandir)/man1/autossh.1 
+		chmod 644 $(mandir)/man1/autossh.1

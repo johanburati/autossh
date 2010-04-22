@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # sample script to use autossh to open up a remote screen
-# session, or reconnect to an existing one. 
+# session, or reconnect to an existing one.
 #
 # $Id: rscreen,v 1.4 2002/05/07 17:54:13 harding Exp $
 #
@@ -19,7 +19,7 @@ fi
 #AUTOSSH_PORT=20000
 #AUTOSSH_GATETIME=30
 #AUTOSSH_LOGFILE=$HOST.log
-#AUTOSSH_DEBUG=yes 
+#AUTOSSH_DEBUG=yes
 #AUTOSSH_PATH=/usr/local/bin/ssh
 export AUTOSSH_POLL AUTOSSH_LOGFILE AUTOSSH_DEBUG AUTOSSH_PATH AUTOSSH_GATETIME AUTOSSH_PORT
 

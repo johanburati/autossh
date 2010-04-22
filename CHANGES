@@ -26,7 +26,7 @@ Version 1.4
 Version 1.3
 
 - fix AUTOSSH_DEBUG for Solaris and AIX
-- fix attempt to free() static storage (affected platforms without 
+- fix attempt to free() static storage (affected platforms without
   getaddrinfo() -- mostly cygwin) (Andrew Schulman)
 - change test and placement of typedef for socklen_t under OS X; new
   OS X defines it
@@ -64,8 +64,8 @@ Version 1.2g
 - handle environment variables and -M arg being set to the
   empty string (reported by Dan Christensen via Filippo Giunche)
 - add some rudimetary auto-adjust to the network timeouts for
-  low poll times. So by default 15secs on each of accept() and 
-  poll()to deal with high-latency connections, but as poll time 
+  low poll times. So by default 15secs on each of accept() and
+  poll()to deal with high-latency connections, but as poll time
   falls below 30secs, then adjust timeouts down as well.
 - adjust division in grace_time() to allow for low poll time
 - don't call shutdown() and close() on invalid socket ()
@@ -73,7 +73,7 @@ Version 1.2g
 
 Version 1.2f
 
-- by popular request, support the -f flag by doing the fork/background 
+- by popular request, support the -f flag by doing the fork/background
   ourselves, and not passing the flag to ssh (thanks to Dan Christensen
   for prodding me into it)
 - change timeout to from 5000 to 15000 ms to deal with reported issues
@@ -99,7 +99,7 @@ Version 1.2d
 
 Version 1.2c
 
-- use Marcus Friedl's suggestion to simply connect to "127.0.0.1" 
+- use Marcus Friedl's suggestion to simply connect to "127.0.0.1"
   rather than "localhost", as not really using IPv6 anyway. And this
   gets rid of annoying ipv6 localhost message on Solaris at least.
 - support for MacOS X using Greg Parker's fakepoll.
@@ -125,13 +125,13 @@ Version 1.2a
   someone tells me we really need them, I've #ifdef'd  the
   setsockopt()s out for Linux.
 - check value of fd returned by accept().
-- Oh, there's a man page now. Unfortunately, it doesn't render 
+- Oh, there's a man page now. Unfortunately, it doesn't render
   for Solaris. Sorry, Solaris users are still stuck with the
   README.
 
 Version 1.2
 
-- Major restructuring of code, mostly to support the change to 
+- Major restructuring of code, mostly to support the change to
   a loop of forwarded ports to test the network connection.
 - Incremental back off on rate of connection attempts when
   there are rapid failures to establish/maintain a connection.

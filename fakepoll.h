@@ -3,13 +3,13 @@
  *
  * Warning: a call to this poll() takes about 4K of stack space.
  * Greg Parker     gparker-web@sealiesoftware.com     December 2000
- * This code is in the public domain and may be copied or modified without 
- * permission. 
+ * This code is in the public domain and may be copied or modified without
+ * permission.
  *
- * Updated May 2002: 
+ * Updated May 2002:
  * * fix crash when an fd is less than 0
  * * set errno=EINVAL if an fd is greater or equal to FD_SETSIZE
- * * don't set POLLIN or POLLOUT in revents if it wasn't requested 
+ * * don't set POLLIN or POLLOUT in revents if it wasn't requested
  *   in events (only happens when an fd is in the poll set twice)
  *
  * Updated Dec 2002:
@@ -69,7 +69,7 @@ inline int poll(struct pollfd *pollSet, int pollCount, int pollTimeout)
         writep = NULL;
         exceptp = NULL;
         maxFD = 0;
-    } 
+    }
     else {
         pollEnd = pollSet + pollCount;
         readp = &readFDs;
@@ -79,7 +79,7 @@ inline int poll(struct pollfd *pollSet, int pollCount, int pollTimeout)
         FD_ZERO(readp);
         FD_ZERO(writep);
         FD_ZERO(exceptp);
-        
+
         /* Find the biggest fd in the poll set */
         maxFD = 0;
         for (p = pollSet; p < pollEnd; p++) {
@@ -91,7 +91,7 @@ inline int poll(struct pollfd *pollSet, int pollCount, int pollTimeout)
             errno = EINVAL;
             return -1;
         }
-        
+
         /* Transcribe flags from the poll set to the fd sets */
         for (p = pollSet; p < pollEnd; p++) {
             if (p->fd < 0) {
@@ -106,7 +106,7 @@ inline int poll(struct pollfd *pollSet, int pollCount, int pollTimeout)
             }
         }
     }
-        
+
     /* poll timeout is in milliseconds. Convert to struct timeval.
      * poll timeout == -1 : wait forever : select timeout of NULL
      * poll timeout == 0  : return immediately : select timeout of zero
@@ -118,19 +118,19 @@ inline int poll(struct pollfd *pollSet, int pollCount, int pollTimeout)
     } else {
         tvp = NULL;
     }
-    
-    
+
+
     selected = select(maxFD+1, readp, writep, exceptp, tvp);
 
 
     if (selected < 0) {
         /* Error during select */
         result = -1;
-    } 
+    }
     else if (selected > 0) {
         /* Select found something
          * Transcribe result from fd sets to poll set.
-         * Also count the number of selected fds. poll returns the 
+         * Also count the number of selected fds. poll returns the
          * number of ready fds; select returns the number of bits set.
 	 */
         int polled = 0;
