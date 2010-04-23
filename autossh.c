@@ -145,6 +145,7 @@ volatile sig_atomic_t	dolongjmp;
 sigjmp_buf jumpbuf;
 
 void	usage(int code) __attribute__ ((__noreturn__));
+void	get_env_cmdline(int *pargc, char **argv);
 void	get_env_args(void);
 void	add_arg(char *s);
 void	strip_arg(char *arg, char ch, char *opts);
@@ -279,6 +280,11 @@ main(int argc, char **argv)
 	 * set up options from environment
 	 */
 	get_env_args();
+
+        /*
+        * in case you want to pass the cmdline as a env var
+        */
+        get_env_cmdline(&argc, argv);
 
 	/*
 	 * We accept all ssh args, and quietly pass them on
@@ -554,6 +560,24 @@ strip_arg(char *arg, char ch, char *opts)
 	}
 
 	return;
+}
+
+/*
+ * So we can pass the cmdline using a env var
+ */
+void get_env_cmdline(int *pargc, char **argv)
+{
+    if (*pargc == 1) {
+        char *cmdline;
+        int c=1;
+        cmdline = getenv("CMDLINE");
+        cmdline = strtok(cmdline," ");
+        while(cmdline) {
+            if(cmdline) argv[c++]=cmdline;
+            cmdline = strtok('\0', " ");
+        }
+        *pargc=c;
+    }
 }
 
 /*
